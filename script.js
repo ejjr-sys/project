@@ -1,7 +1,7 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
-const modal = document.getElementById("modal");
 const openLetter = document.getElementById("openLetter");
+const modal = document.getElementById("modal");
 const closeModal = document.getElementById("closeModal");
 const mainContent = document.getElementById("mainContent");
 const success = document.getElementById("success");
@@ -11,7 +11,7 @@ const music = document.getElementById("music");
 function moveNoButton() {
   const x = Math.random() * 200 - 100;
   const y = Math.random() * 200 - 100;
-  noBtn.style.transform = `translate(${x}px, ${y}px) scale(0.9)`;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
 noBtn.addEventListener("mouseenter", moveNoButton);
@@ -26,9 +26,9 @@ yesBtn.addEventListener("click", () => {
 
 
 openLetter.addEventListener("click", () => {
-  modal.style.display = "flex";
+  modal.classList.remove("hidden");
 });
 
 closeModal.addEventListener("click", () => {
-  modal.style.display = "none";
+  modal.classList.add("hidden");
 });
