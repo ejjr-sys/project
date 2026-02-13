@@ -1,34 +1,27 @@
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const openLetter = document.getElementById("openLetter");
-const modal = document.getElementById("modal");
-const closeModal = document.getElementById("closeModal");
-const mainContent = document.getElementById("mainContent");
-const success = document.getElementById("success");
-const music = document.getElementById("music");
+const noBtn = document.getElementById('noBtn');
+const videoModal = document.getElementById('videoModal');
+const vdayVideo = document.getElementById('vdayVideo');
 
-
-function moveNoButton() {
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 200 - 100;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+function openLetter() {
+  videoModal.classList.remove('hidden');
+  vdayVideo.play();
 }
 
-noBtn.addEventListener("mouseenter", moveNoButton);
-noBtn.addEventListener("touchstart", moveNoButton);
+function closeModal() {
+  videoModal.classList.add('hidden');
+  vdayVideo.pause();
+}
 
+function celebrate() {
+  document.getElementById('letterSection').classList.add('hidden');
+  document.getElementById('successScreen').classList.remove('hidden');
+}
 
-yesBtn.addEventListener("click", () => {
-  mainContent.style.display = "none";
-  success.classList.remove("hidden");
-  music.play().catch(() => {});
-});
-
-
-openLetter.addEventListener("click", () => {
-  modal.classList.remove("hidden");
-});
-
-closeModal.addEventListener("click", () => {
-  modal.classList.add("hidden");
+// Dodge logic for the "No" button
+noBtn.addEventListener('mouseover', () => {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
 });
