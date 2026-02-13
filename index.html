@@ -1,180 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine 💖</title>
-    <style>
-        body {
-            background-color: #ffcad4;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine 💖</title>
+  <style>
+    /* ===== General Styles ===== */
+    body {
+      background-color: #ffcad4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+    }
 
-        .container { text-align: center; width: 100%; padding: 20px; }
-        .hidden { display: none !important; }
+    .container {
+      text-align: center;
+      width: 100%;
+      padding: 20px;
+    }
 
-        /* Elegant Envelope */
-        .envelope-wrapper {
-            width: 280px;
-            height: 180px;
-            background: #f08080;
-            margin: 0 auto 20px;
-            position: relative;
-            cursor: pointer;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        .envelope-wrapper:hover { transform: scale(1.02); }
+    .hidden {
+      display: none !important;
+    }
 
-        .flap {
-            position: absolute;
-            top: 0;
-            border-left: 140px solid transparent;
-            border-right: 140px solid transparent;
-            border-top: 90px solid #ff4d6d;
-            z-index: 2;
-        }
+    h1 {
+      color: #d90429;
+      margin-top: 20px;
+    }
 
-        .letter-content {
-            background: white;
-            width: 250px;
-            height: 140px;
-            margin: 15px auto;
-            padding: 15px;
-            font-size: 13px;
-            color: #444;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1.4;
-            box-sizing: border-box;
-        }
+    p {
+      color: #444;
+    }
 
-        /* Buttons */
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            margin: 10px;
-        }
+    /* ===== Envelope Styles ===== */
+    .envelope-wrapper {
+      width: 280px;
+      height: 180px;
+      background: linear-gradient(180deg, #ff4d6d 0%, #f08080 100%);
+      margin: 0 auto 20px;
+      position: relative;
+      cursor: pointer;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
 
-        .yes-btn { background: #4caf50; color: white; font-size: 1.2rem; }
-        .no-btn { background: #d90429; color: white; position: absolute; z-index: 10; }
-        .back-btn { background: #666; color: white; margin-top: 20px; }
+    .envelope-wrapper:hover {
+      transform: scale(1.03);
+    }
 
-        /* Video Modal */
-        .modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
+    .flap {
+      position: absolute;
+      top: 0;
+      border-left: 140px solid transparent;
+      border-right: 140px solid transparent;
+      border-top: 90px solid #ff4d6d;
+      border-radius: 4px;
+      z-index: 2;
+    }
 
-        .modal-card {
-            background: white;
-            padding: 20px;
-            border-radius: 20px;
-            max-width: 400px;
-            width: 90%;
-        }
+    .letter-content {
+      background: white;
+      width: 240px;
+      height: 130px;
+      margin: 15px auto;
+      padding: 15px;
+      font-size: 14px;
+      color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.4;
+      text-align: center;
+      border-radius: 6px;
+      box-sizing: border-box;
+      transition: box-shadow 0.3s;
+    }
 
-        video { width: 100%; border-radius: 10px; background: black; }
-        
-        .success img { max-width: 250px; border-radius: 20px; margin-top: 20px; }
-        h1 { color: #d90429; }
-    </style>
+    .envelope-wrapper:hover .letter-content {
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ===== Buttons ===== */
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+      margin: 10px;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .yes-btn {
+      background: #4caf50;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .no-btn {
+      background: #d90429;
+      color: white;
+      position: absolute;
+      z-index: 10;
+    }
+
+    .back-btn {
+      background: #666;
+      color: white;
+      margin-top: 20px;
+    }
+
+    /* ===== Modal ===== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-card {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 10px;
+      background: black;
+    }
+
+    .success img {
+      max-width: 250px;
+      border-radius: 20px;
+      margin-top: 20px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 480px) {
+      .envelope-wrapper {
+        width: 230px;
+        height: 150px;
+      }
+
+      .flap {
+        border-left-width: 115px;
+        border-right-width: 115px;
+        border-top-width: 80px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <div class="container">
-        <div id="mainPage">
-            <div class="envelope-wrapper" onclick="openVideo()">
-                <div class="flap"></div>
-                <div class="letter-content">
-                    💌 I’ve been learning this because the lyrics remind me so much of how lucky I feel to have you. I wanted to dedicate it to you tonight. <br>(Click to open)
-                </div>
-            </div>
-            <h1>Will you be my Valentine?</h1>
-            <button class="btn yes-btn" onclick="showSuccess()">Yes</button>
-            <button id="noBtn" class="btn no-btn">No</button>
+  <div class="container">
+    <!-- Main Page -->
+    <div id="mainPage">
+      <div class="envelope-wrapper" onclick="openVideo()">
+        <div class="flap"></div>
+        <div class="letter-content">
+          💌 I learned this because the lyrics remind me of how lucky I feel to have you.  
+          <br /><br />(Click to open)
         </div>
+      </div>
 
-        <div id="videoModal" class="modal hidden">
-            <div class="modal-card">
-                <video id="vdayVideo" controls playsinline>
-                    <source src="https://drive.google.com/file/d/1ZOOS_nlzqIWqntIJtQfjqr0hOVbD5ji_/view?usp=sharing" type="video/mp4">
-                </video>
-                <p style="font-size: 0.8rem;">(If video is black, tap play! 🔊)</p>
-                <button class="btn" onclick="closeVideo()" style="background:#666; color:white;">Close & Back</button>
-            </div>
-        </div>
-
-        <div id="successPage" class="success hidden">
-            <h1>YEYY HEHEHE I LOVE YOU BABY ❤️</h1>
-            <p>I can’t wait to spend Valentine’s Day with you!</p>
-            <img src="https://media.giphy.com/media/l4FGpPki5v2Bcd6Ss/giphy.gif" alt="cute gif">
-            <br>
-            <button class="btn back-btn" onclick="goBackHome()">← Back to Letter</button>
-        </div>
+      <h1>Will you be my Valentine?</h1>
+      <button class="btn yes-btn" onclick="showSuccess()">Yes</button>
+      <button id="noBtn" class="btn no-btn">No</button>
     </div>
 
-    <script>
-        const noBtn = document.getElementById('noBtn');
-        const video = document.getElementById('vdayVideo');
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal hidden">
+      <div class="modal-card">
+        <video id="vdayVideo" controls playsinline>
+          <!-- Replace the example link below with your proper Google Drive direct share link -->
+          <source src="https://youtu.be/Xo4GsXk30II?si=LXmAD3sVqCFDWlM9" />
+        </video>
+        <p style="font-size: 0.8rem;">(If video is black, tap play! 🔊)</p>
+        <button class="btn back-btn" onclick="closeVideo()">Close & Back</button>
+      </div>
+    </div>
 
-        function openVideo() {
-            document.getElementById('videoModal').classList.remove('hidden');
-            video.play().catch(err => console.log("Manual play needed"));
-        }
+    <!-- Success Page -->
+    <div id="successPage" class="success hidden">
+      <h1>YEYY HEHEHE I LOVE YOU BABY ❤️</h1>
+      <p>I can’t wait to spend Valentine’s Day with you!</p>
+      <img
+        src="https://media.giphy.com/media/l4FGpPki5v2Bcd6Ss/giphy.gif"
+        alt="cute gif"
+      />
+      <br />
+      <button class="btn back-btn" onclick="goBackHome()">← Back to Letter</button>
+    </div>
+  </div>
 
-        function closeVideo() {
-            document.getElementById('videoModal').classList.add('hidden');
-            video.pause();
-        }
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const videoModal = document.getElementById("videoModal");
+    const video = document.getElementById("vdayVideo");
 
-        function showSuccess() {
-            document.getElementById('mainPage').classList.add('hidden');
-            document.getElementById('successPage').classList.remove('hidden');
-        }
+    /* ===== Video Modal Functions ===== */
+    function openVideo() {
+      videoModal.classList.remove("hidden");
+      video.play().catch(() => console.log("Manual play needed"));
+    }
 
-        function goBackHome() {
-            document.getElementById('successPage').classList.add('hidden');
-            document.getElementById('mainPage').classList.remove('hidden');
-            // Reset No button position
-            noBtn.style.position = 'static';
-        }
+    function closeVideo() {
+      videoModal.classList.add("hidden");
+      video.pause();
+    }
 
-        // The running No button logic
-        noBtn.addEventListener('mouseover', () => {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-        });
+    /* ===== Success Page Functions ===== */
+    function showSuccess() {
+      document.getElementById("mainPage").classList.add("hidden");
+      document.getElementById("successPage").classList.remove("hidden");
+    }
 
-        // Also move for touch screens
-        noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-        });
-    </script>
+    function goBackHome() {
+      document.getElementById("successPage").classList.add("hidden");
+      document.getElementById("mainPage").classList.remove("hidden");
+      noBtn.style.position = "static";
+    }
+
+    /* ===== No Button Evasion ===== */
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.position = "fixed";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+  </script>
 </body>
 </html>
