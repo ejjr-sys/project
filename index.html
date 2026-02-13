@@ -6,7 +6,6 @@
 <title>Be My Valentine 💖</title>
 
 <style>
-/* ===== RESET ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,7 +13,6 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ===== PAGE ===== */
 body {
   background: #ffcad4;
   min-height: 100vh;
@@ -23,10 +21,8 @@ body {
   align-items: center;
 }
 
-/* ===== CONTAINER ===== */
 .container {
   text-align: center;
-  width: 100%;
   max-width: 420px;
   padding: 20px;
 }
@@ -48,17 +44,12 @@ p {
 .envelope {
   width: 280px;
   height: 180px;
-  margin: 0 auto 20px;
+  margin: 20px auto;
   background: linear-gradient(180deg, #ff4d6d, #f08080);
   border-radius: 0 0 12px 12px;
   position: relative;
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-  transition: transform 0.25s;
-}
-
-.envelope:hover {
-  transform: scale(1.03);
 }
 
 .envelope::before {
@@ -82,18 +73,14 @@ p {
   margin: 20px auto;
   padding: 15px;
   border-radius: 8px;
-  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: 14px;
 }
 
 /* ===== BUTTONS ===== */
-.buttons {
-  margin-top: 15px;
-}
-
 button {
   border: none;
   padding: 12px 25px;
@@ -101,17 +88,11 @@ button {
   font-weight: bold;
   cursor: pointer;
   margin: 8px;
-  transition: transform 0.2s;
-}
-
-button:hover {
-  transform: scale(1.05);
 }
 
 .yes {
   background: #4caf50;
   color: white;
-  font-size: 1.1rem;
 }
 
 .no {
@@ -123,7 +104,7 @@ button:hover {
 .back {
   background: #666;
   color: white;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 /* ===== MODAL ===== */
@@ -151,57 +132,41 @@ iframe {
   border-radius: 10px;
   border: none;
 }
-
-/* ===== SUCCESS ===== */
-.success img {
-  width: 230px;
-  margin-top: 15px;
-  border-radius: 18px;
-}
 </style>
 </head>
 
 <body>
 <div class="container">
 
-  <!-- MAIN PAGE -->
+  <!-- MAIN -->
   <div id="main">
+    <h1>Will you be my Valentine?</h1>
+
+    <button class="yes" onclick="showSuccess()">Yes</button>
+    <button class="no" id="noBtn">No</button>
+
     <div class="envelope" onclick="openVideo()">
       <div class="letter">
         💌 I learned this because the lyrics remind me of how lucky I feel to have you.
-        <br><br>
-        (Click to open)
+        <br><br>(Click to open)
       </div>
-    </div>
-
-    <h1>Will you be my Valentine?</h1>
-
-    <div class="buttons">
-      <button class="yes" onclick="showSuccess()">Yes</button>
-      <button class="no" id="noBtn">No</button>
     </div>
   </div>
 
   <!-- VIDEO MODAL -->
   <div id="videoModal" class="modal hidden">
     <div class="modal-card">
-      <iframe
-        id="vdayVideo"
-        src="https://www.youtube.com/embed/Xo4GsXk30II"
-        title="Valentine Video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-      <p style="font-size: 0.8rem; margin-top: 8px;">(Tap play if needed 🔊)</p>
+      <div id="videoContainer"></div>
+      <p style="font-size:0.8rem">(Tap play if needed 🔊)</p>
       <button class="back" onclick="closeVideo()">Close</button>
     </div>
   </div>
 
-  <!-- SUCCESS PAGE -->
-  <div id="success" class="success hidden">
+  <!-- SUCCESS -->
+  <div id="success" class="hidden">
     <h1>YEYY HEHEHE I LOVE YOU BABY ❤️</h1>
     <p>I can’t wait to spend Valentine’s Day with you!</p>
-    <img src="https://media.giphy.com/media/l4FGpPki5v2Bcd6Ss/giphy.gif" alt="love gif">
+    <img src="https://media.giphy.com/media/l4FGpPki5v2Bcd6Ss/giphy.gif" width="220">
     <br>
     <button class="back" onclick="goBack()">← Back</button>
   </div>
@@ -211,16 +176,22 @@ iframe {
 <script>
 const noBtn = document.getElementById("noBtn");
 const videoModal = document.getElementById("videoModal");
-const iframe = document.getElementById("vdayVideo");
+const videoContainer = document.getElementById("videoContainer");
 
 function openVideo() {
   videoModal.classList.remove("hidden");
+  videoContainer.innerHTML = `
+    <iframe
+      src="https://www.youtube.com/embed/Xo4GsXk30II"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  `;
 }
 
 function closeVideo() {
   videoModal.classList.add("hidden");
-  // stop video when closing
-  iframe.src = iframe.src;
+  videoContainer.innerHTML = "";
 }
 
 function showSuccess() {
@@ -234,10 +205,8 @@ function goBack() {
 }
 
 function moveNo() {
-  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
+  noBtn.style.left = Math.random() * (window.innerWidth - 80) + "px";
+  noBtn.style.top = Math.random() * (window.innerHeight - 40) + "px";
 }
 
 noBtn.addEventListener("mouseover", moveNo);
