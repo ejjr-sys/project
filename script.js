@@ -1,15 +1,15 @@
 const noBtn = document.getElementById('noBtn');
 const videoModal = document.getElementById('videoModal');
-const vdayVideo = document.getElementById('vdayVideo');
+const video = document.getElementById('vdayVideo');
 
-function openLetter() {
+function openVideo() {
   videoModal.classList.remove('hidden');
-  vdayVideo.play();
+  video.play();
 }
 
-function closeModal() {
+function closeVideo() {
   videoModal.classList.add('hidden');
-  vdayVideo.pause();
+  video.pause();
 }
 
 function celebrate() {
@@ -17,7 +17,7 @@ function celebrate() {
   document.getElementById('successScreen').classList.remove('hidden');
 }
 
-// Dodge logic for the "No" button
+// Logic to make the NO button move away
 noBtn.addEventListener('mouseover', () => {
   const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
   const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
