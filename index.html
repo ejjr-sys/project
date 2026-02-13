@@ -1,34 +1,157 @@
-<div class="container">
-  <div id="letterSection" class="scene">
-    <div class="envelope-wrapper" onclick="openVideo()">
-      <div class="envelope">
-        <div class="flap"></div>
-        <div class="letter-content">
-          <p>💌 I’ve been learning this because the lyrics remind me so much of how lucky I feel to have you. I wanted to dedicate it to you tonight.</p>
-          <small>(Click to open video)</small>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine 💖</title>
+    <style>
+        /* CSS IS NOW INSIDE THE HTML FILE */
+        body {
+            background-color: #ffcad4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container { text-align: center; width: 100%; padding: 20px; }
+        .hidden { display: none !important; }
+
+        /* Elegant Envelope */
+        .envelope-wrapper {
+            width: 280px;
+            height: 180px;
+            background: #f08080;
+            margin: 0 auto 20px;
+            position: relative;
+            cursor: pointer;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 90px solid #ff4d6d;
+            z-index: 2;
+        }
+
+        .letter-content {
+            background: white;
+            width: 250px;
+            height: 140px;
+            margin: 15px auto;
+            padding: 15px;
+            font-size: 13px;
+            color: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.4;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px;
+        }
+
+        .yes-btn { background: #4caf50; color: white; font-size: 1.2rem; }
+        .no-btn { background: #d90429; color: white; position: absolute; z-index: 10; }
+
+        /* Video Modal */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        video { width: 100%; border-radius: 10px; background: black; }
+        
+        .success img { max-width: 100%; border-radius: 20px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="mainPage">
+            <div class="envelope-wrapper" onclick="openVideo()">
+                <div class="flap"></div>
+                <div class="letter-content">
+                    💌 I’ve been learning this because the lyrics remind me so much of how lucky I feel to have you. I wanted to dedicate it to you tonight.
+                </div>
+            </div>
+            <h1>Will you be my Valentine?</h1>
+            <button class="btn yes-btn" onclick="showSuccess()">Yes</button>
+            <button id="noBtn" class="btn no-btn">No</button>
         </div>
-      </div>
-    </div>
-    
-    <h1 class="title">Will you be my Valentine?</h1>
-    <div class="button-group">
-      <button id="yesBtn" class="btn yes-btn" onclick="celebrate()">Yes</button>
-      <button id="noBtn" class="btn no-btn">No</button>
-    </div>
-  </div>
 
-  <div id="videoModal" class="modal hidden">
-    <div class="modal-card">
-      <video id="vdayVideo" controls playsinline crossorigin="anonymous">
-        <source src="https://drive.google.com/uc?export=download&id=1ZOOS_nlzqIWqntIJtQfjqr0hOVbD5ji_" type="video/mp4">
-      </video>
-      <button class="btn close-btn" onclick="closeVideo()">Close & Back</button>
-    </div>
-  </div>
+        <div id="videoModal" class="modal hidden">
+            <div class="modal-card">
+                <video id="vdayVideo" controls playsinline>
+                    <source src="https://drive.google.com/uc?export=download&id=1ZOOS_nlzqIWqntIJtQfjqr0hOVbD5ji_" type="video/mp4">
+                </video>
+                <br>
+                <button class="btn" onclick="closeVideo()" style="background:#666; color:white;">Close & Back</button>
+            </div>
+        </div>
 
-  <div id="successScreen" class="scene hidden">
-    <h1 class="glow-text">YEYY HEHEHE I LOVE YOU BABY ❤️</h1>
-    <p>I can’t wait to spend Valentine’s Day with you!</p>
-    <img src="https://media.giphy.com/media/l4FGpPki5v2Bcd6Ss/giphy.gif" alt="cute gif">
-  </div>
-</div>
+        <div id="successPage" class="success hidden">
+            <h1>YEYY HEHEHE I LOVE YOU BABY ❤️</h1>
+            <p>I can’t wait to spend Valentine’s Day with you!</p>
+            <img src="https://media.giphy.com/media/l4FGpPki5v2Bcd6Ss/giphy.gif" alt="cute gif">
+        </div>
+    </div>
+
+    <script>
+        /* JAVASCRIPT IS NOW INSIDE THE HTML FILE */
+        const noBtn = document.getElementById('noBtn');
+        const video = document.getElementById('vdayVideo');
+
+        function openVideo() {
+            document.getElementById('videoModal').classList.remove('hidden');
+            video.play();
+        }
+
+        function closeVideo() {
+            document.getElementById('videoModal').classList.add('hidden');
+            video.pause();
+        }
+
+        function showSuccess() {
+            document.getElementById('mainPage').classList.add('hidden');
+            document.getElementById('successPage').classList.remove('hidden');
+        }
+
+        // The running No button
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+    </script>
+</body>
+</html>
